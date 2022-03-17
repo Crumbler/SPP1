@@ -8,34 +8,19 @@ app.set('view engine', 'ejs');
 app.use('/css', express.static('css'));
 
 app.get('/', (req, res) => {
+  const rawTasks = fs.readFileSync('tasks.json');
+  let tasks = JSON.parse(rawTasks);
 
-  let tagLine = req.query.tagLine;
-
-  if (!req.query.tagLine)
+  if (req.query.filter && req.query.filter !== 'None')
   {
-      tagLine = 'no tag supplied';
+    tasks = tasks.filter(task => task.status === req.query.filter);
   }
 
   res.render('index.ejs', { 
-      tagLine: tagLine
+      tasks: tasks,
+      filter: req.query.filter ?? "None"
   } );
 });
-
-app.get('/test/', (req, res) => {
-    let rawdata = fs.readFileSync('tasks.json');
-    let student = JSON.parse(rawdata);
-
-    res.json(student);
-
-    /*if (req.query.something)
-    {
-        res.send(req.query.something);
-    }
-    else
-    {
-        res.send('nothing sent');
-    }*/
-  });
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

@@ -22,7 +22,7 @@ header > h1
     font-size: 3rem;
 }
 
-header > p, aside, main
+header > p, aside, main, form *
 {
     font-size: 2rem;
 }

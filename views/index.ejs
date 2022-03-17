@@ -14,14 +14,30 @@
         </header>
         <div class="flex-main">
             <aside>
-                The sidebar
+                <form>
+                    <label for="filter-type">Filter:</label><br>
+                    <select id="filter-type" name="filter">
+                        <option>None</option>
+                        <option>Complete</option>
+                        <option>Incomplete</option>
+                        <option>Not started</option>
+                    </select>
+                    <input type="submit" value="Apply">
+                </form>
+                <form>
+
+                </form>
             </aside>
             <main>
-                <div>Task 1</div>
-                <div>Task 2</div>
-                <div>Task 3</div>
-                <div>Task 4</div>
-                <div>Task 5</div>
+                <% for (let i = 0; i < tasks.length; ++i) { %>
+                    <div>
+                        Task №<%= tasks[i].id %><br>
+                        <%= tasks[i].title %>:
+                        <%= tasks[i].status %><br>
+                        Completion date: <%= tasks[i].completionDate ?? "None" %><br>
+                        File attached: <%= tasks[i].hasFile ? "Yes" : "No" %>
+                    </div>
+                <% } %>
             </main>
         </div>
     </body>
