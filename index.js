@@ -1,13 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const multer  = require('multer');
+const upload = multer({ dest: 'Task files/' });
 const fs = require('fs');
-const { url } = require('inspector');
 const app = express();
 const port = 80;
-
-const urlencodedParser = bodyParser.urlencoded({
-  extended: false,
-});
 
 app.set('view engine', 'ejs');
 app.use('/css', express.static('css'));
@@ -30,10 +26,10 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/', urlencodedParser, (req, res) => {
+app.post('/', upload.single('file'), (req, res) => {
   if (!req.body || !req.body.task) 
   {
-    return response.sendStatus(400);
+    return res.sendStatus(400);
   }
 
   const rawTasks = fs.readFileSync('tasks.json');
@@ -49,7 +45,24 @@ app.post('/', urlencodedParser, (req, res) => {
   {
     tasks[taskId - 1].completionDate = null;
   }
-  
+
+  if (req.file)
+  {
+    fs.renameSync('Task files/' + req.file.filename, 'Task files/' + taskId + '.bin');
+    tasks[taskId - 1].hasFile = true;
+  }
+  else
+  {
+    try 
+    {
+      fs.unlinkSync('Task files/' + taskId + '.bin');
+    } catch(err) 
+    {
+      // file didn't exist
+    }
+    tasks[taskId - 1].hasFile = false;
+  }
+
   const writeData = JSON.stringify(tasks, null, 2);
   fs.writeFileSync('tasks.json', writeData);
 

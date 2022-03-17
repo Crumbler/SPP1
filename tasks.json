@@ -24,7 +24,7 @@
     "title": "Fourth task",
     "id": 4,
     "status": "Not started",
-    "completionDate": "2022-03-04",
+    "completionDate": null,
     "hasFile": false
   },
   {
