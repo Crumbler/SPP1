@@ -24,8 +24,14 @@
                     </select>
                     <input type="submit" value="Apply">
                 </form>
-                <form>
-
+                <form method="post">
+                    <label for="task-id">Select task:</label>
+                    <input type="number" id="task-id" name="task" min="1" max="<%= totalTasks %>" value="1"><br>
+                    <label for="task-date">Completion date:</label>
+                    <input type="date" id="task-date" name="date"><br>
+                    <label for="task-file">Attach file:</label>
+                    <input type="file" id="task-file" name="file"><br>
+                    <input type="submit" value="Update task">
                 </form>
             </aside>
             <main>

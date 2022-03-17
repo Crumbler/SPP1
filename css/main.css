@@ -42,6 +42,11 @@ aside
     min-width: 500px;
 }
 
+aside > form:first-child
+{
+    margin-bottom: 2rem;
+}
+
 main
 {
     flex-shrink: 1;
