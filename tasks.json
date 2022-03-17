@@ -1,0 +1,26 @@
+[
+    {
+        "title": "First task",
+        "status": "Not started",
+        "completionDate": null,
+        "hasFile": false
+    },
+    {
+        "title": "Second task",
+        "status": "Not started",
+        "completionDate": null,
+        "hasFile": false
+    },
+    {
+        "title": "Third task",
+        "status": "Not started",
+        "completionDate": null,
+        "hasFile": false
+    },
+    {
+        "title": "Fourth task",
+        "status": "Not started",
+        "completionDate": null,
+        "hasFile": false
+    }
+]
